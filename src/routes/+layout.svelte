@@ -1,13 +1,13 @@
 <script>
-    import "../app.css";
-    import { invalidate } from '$app/navigation';
+	import '../app.css';
+	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-    export let data
-  let { supabase, session } = data
-  $: ({ supabase, session } = data)
+	export let data;
+	let { supabase, session } = data;
+	$: ({ supabase, session } = data);
 
-  onMount(() => {
+	onMount(() => {
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange((event, _session) => {
@@ -22,12 +22,12 @@
 	async function logout() {
 		await supabase.auth.signOut();
 	}
-  </script>
+</script>
 
 {#if session}
-  <button on:click={logout}>Logout</button>
+	<button on:click={logout}>Logout</button>
 {:else}
-  <a href="/login">Login</a>
+	<a href="/login">Login</a>
 {/if}
-  
-  <slot />
+
+<slot />
